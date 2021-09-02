@@ -4,14 +4,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 import { tColor } from './Template'
+import { Header } from './src/Header';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style = {styles.text}>
-        BRUH
-      </Text>
-      <StatusBar style="auto" />
+      <Header/>
     </View>
   );
 }
@@ -20,10 +18,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: tColor.background,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  text: {
-    color: '#1ff'
-  }
 });
