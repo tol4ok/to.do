@@ -1,11 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+import { tColor } from './Template'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text style = {styles.text}>
+        BRUH
+      </Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -14,8 +19,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: tColor.background,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    color: '#1ff'
+  }
 });
