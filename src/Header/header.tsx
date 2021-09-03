@@ -1,9 +1,9 @@
+import React, {useCallback, FC} from 'react';
+import { Button, View } from 'react-native';
+
+
 import { styles } from "./header.styles";
 
-import React from 'react';
-import { Button, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { useCallback } from "react";
-import { FC } from "react";
 
 interface HeaderProps {
   onClick?: (value: string) => unknown; 

@@ -1,18 +1,22 @@
-import React from 'react';
-import { Button, Platform, SafeAreaView, StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
-import { useCallback } from "react";
-import { FC } from "react";
+import React, { FC } from 'react';
+import { TextInput } from 'react-native';
 
 import { styles } from "./Input.styles";
 
 interface InputProps {
   isClicked?: boolean;
+  onChange?: (value: string) => unknown;
+  onEditing?: (value: string) => unknown;
 }
 
 export const Input: FC<InputProps> = (props) => {
 
+
+
   const {
     isClicked,
+    onChange,
+    onEditing,
   }: InputProps = {
     ...defaultProps,
     ...props,
@@ -20,7 +24,7 @@ export const Input: FC<InputProps> = (props) => {
 
   return (
     <>
-      {isClicked && <TextInput style={styles.input}/>}
+      {isClicked && <TextInput onChangeText={(text) => onChange(text)} onEndEditing={() => onEditing("")} style={styles.input}/>}
     </>
   )
 
@@ -29,4 +33,6 @@ export const Input: FC<InputProps> = (props) => {
 
 const defaultProps: Required<InputProps> = {
   isClicked: false,
+  onChange: () => {},
+  onEditing: () => {},
 }

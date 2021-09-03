@@ -1,14 +1,23 @@
+
+import React, {FC} from 'react';
+import { Text } from 'react-native';
+
+
 // import { styles } from "./ListItem.styles";
+import { IList } from '../../types';
 
-import React from 'react';
-import { Button, Platform, SafeAreaView, StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
-import { useCallback } from "react";
-import { FC } from "react";
+interface IListItemProps {
+  items: IList[];
+}
 
-export const ListItem:FC = () => {
+export const ListItem:FC<IListItemProps> = ({items}) => {
   return(
-    <TouchableHighlight>
-      <Text></Text>
-    </TouchableHighlight>
+    <>
+      {items.map((item) => (
+        <>
+          <Text>{item.text}</Text>
+        </>
+      ))}
+    </>
   )
 }
