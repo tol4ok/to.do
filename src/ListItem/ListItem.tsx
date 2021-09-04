@@ -11,7 +11,7 @@ interface IListItemProps {
   editable?: boolean;
   onPress?: (id: string) => unknown;
   onEdit?: (item: IList) => unknown;
-  onChangeText?: (str: string) => unknown;
+  onChangeText?: (value: string) => unknown;
 }
 
 export const ListItem:FC<IListItemProps> = (props) => {
@@ -32,7 +32,7 @@ export const ListItem:FC<IListItemProps> = (props) => {
       {items.map((item) => (
         <Fragment key={item.id}>
           <TextInput
-            onChangeText={() => onChangeText("")}
+            onChangeText={(text) => onChangeText(text)}
             onEndEditing={() => onEdit(item)}
             editable={editable}
             defaultValue={item.text}>

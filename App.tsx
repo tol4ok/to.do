@@ -12,7 +12,7 @@ import { ListItem } from './src/ListItem';
 
 export default function App() {
 
-  const [editedObject, setEditedObject] = useState<IList>()
+  const [newInput_text, setNewInput_text] = useState("");
   const [input_Text, setInput_Text] = useState("");
   const [editable, setEditable] = useState(false);
   const [todo, setTodo] = useState<IList[]>([]);
@@ -30,6 +30,10 @@ export default function App() {
   const input = useCallback((prop: string) => {
     setInput_Text(prop);
     setEdited(false);
+  }, [])
+
+  const newInput = useCallback((prop: string) => {
+    setNewInput_text(prop);
   }, [])
 
   const saveInput = useCallback(() => {
@@ -53,8 +57,18 @@ export default function App() {
   }, [todo])
 
   const editTodo = useCallback((item) => {
-    item.text
-  }, [])
+    const newItem = {
+      text: newInput_text,
+      id: item.id,
+    };
+    // console.log(newItem);
+    const index = todo.findIndex(e => e.id === item.id);
+    const before = todo.slice(0, index);
+    const after = todo.slice(index + 1);
+    const newTodo = [...before, newItem, ...after];
+    setTodo(newTodo);
+    // console.log(todo);
+  }, [newInput_text])
 
   return (
     <View style={styles.container}>
@@ -73,6 +87,7 @@ export default function App() {
         editable={editable}
         onPress={deleteTodo}
         items={todo}
+        onChangeText={(text) => newInput(text)}
       />
     </View>
   );
