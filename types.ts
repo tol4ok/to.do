@@ -1,4 +1,4 @@
 export interface IList {
-  id: number;
+  id: string;
   text: string;
 }

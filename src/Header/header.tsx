@@ -6,13 +6,15 @@ import { styles } from "./header.styles";
 
 
 interface HeaderProps {
-  onClick?: (value: string) => unknown; 
+  onClick?: (value: string) => unknown;
+  onPress?: (value: string) => unknown;
 }
 
 export const Header: FC<HeaderProps> = (props): JSX.Element => {
   const test = useCallback(() => {console.log("aboba")}, [])
   const {
     onClick,
+    onPress,
   }: HeaderProps = {
     ...defaultProps,
     ...props,
@@ -20,8 +22,14 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
 
     return (
       <View style={styles.header}>
-        <Button onPress={test} title="Править" />
-        <Button title="+" onPress={() => onClick("")} />
+        <Button
+          onPress={() => onPress("")}
+          title="Править"
+        />
+        <Button
+          title="+"
+          onPress={() => onClick("")}
+        />
       </View>
     );
 
@@ -30,4 +38,5 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
 
 const defaultProps: Required<HeaderProps> = {
   onClick: () => {},
+  onPress: () => {},
 }
