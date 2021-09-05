@@ -20,7 +20,7 @@ export default function App() {
   const [edited, setEdited] = useState(false);
   
   const onClick = useCallback(() => {
-    setClicked(true);
+    setClicked(!clicked);
   }, [clicked])
 
   const onPressed = useCallback(() => {

@@ -1,9 +1,9 @@
 
 import React, { FC, Fragment } from 'react';
-import { Text, TouchableHighlight, TextInput, Button } from 'react-native';
+import { Text, TouchableHighlight, TextInput, Button, Pressable, Image } from 'react-native';
 
 
-// import { styles } from "./ListItem.styles";
+import { styles } from "./ListItem.styles";
 import { IList } from '../../types';
 
 interface IListItemProps {
@@ -37,10 +37,16 @@ export const ListItem:FC<IListItemProps> = (props) => {
             editable={editable}
             defaultValue={item.text}>
           </TextInput>
-          <Button
-            onPress={() => onPress(item.id)}
+          {/* <Button
+            
             title="Удалить"
-          />
+          /> */}
+          <Pressable onPress={() => onPress(item.id)}>
+            <Image 
+              style = {styles.image}
+              source = { require('../../assets/check-square-regular.png') }
+            />
+          </Pressable> 
         </Fragment>
       ))}
     </>

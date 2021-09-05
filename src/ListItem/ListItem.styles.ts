@@ -4,4 +4,8 @@ export const styles = StyleSheet.create ({
   textinput: {
     zIndex: -1,
   },
+  image: {
+    width: 30,
+    height: 30,
+  }
 });
