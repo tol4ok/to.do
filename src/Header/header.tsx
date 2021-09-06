@@ -1,5 +1,5 @@
 import React, {useCallback, FC} from 'react';
-import { Button, View } from 'react-native';
+import { Button, Pressable, View, Text } from 'react-native';
 
 
 import { styles } from "./header.styles";
@@ -22,14 +22,13 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
 
     return (
       <View style={styles.header}>
-        <Button
+        {/* <Button
           onPress={() => onPress("")}
           title="Править"
-        />
-        <Button
-          title="+"
+        /> */}
+        <Pressable
           onPress={() => onClick("")}
-        />
+        ><Text>+</Text></Pressable>
       </View>
     );
 

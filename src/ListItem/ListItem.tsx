@@ -12,6 +12,7 @@ interface IListItemProps {
   onPress?: (id: string) => unknown;
   onEdit?: (item: IList) => unknown;
   onChangeText?: (value: string) => unknown;
+  onQuickPress?: (value: string) => unknown;
 }
 
 export const ListItem:FC<IListItemProps> = (props) => {
@@ -22,6 +23,7 @@ export const ListItem:FC<IListItemProps> = (props) => {
     editable,
     onEdit,
     onChangeText,
+    onQuickPress,
   }: IListItemProps = {
     ...defaultProps,
     ...props,
@@ -31,21 +33,20 @@ export const ListItem:FC<IListItemProps> = (props) => {
     <>
       {items.map((item) => (
         <Fragment key={item.id}>
-          <TextInput
-            onChangeText={(text) => onChangeText(text)}
-            onEndEditing={() => onEdit(item)}
-            editable={editable}
-            defaultValue={item.text}>
-          </TextInput>
-          {/* <Button
-            
-            title="Удалить"
-          /> */}
-          <Pressable onPress={() => onPress(item.id)}>
-            <Image 
+
+            {/* <Image 
               style = {styles.image}
               source = { require('../../assets/check-square-regular.png') }
-            />
+            /> */}
+          <Pressable onPress = {() => onQuickPress("")} onLongPress={() => onPress(item.id)}>
+            <TextInput
+            onChangeText={(text) => onChangeText(text)}
+            onEndEditing={() => onEdit(item)}
+            // editable={editable}
+            style={!editable && styles.textinput}
+            defaultValue={item.text}>
+            </TextInput>
+            <Text style={editable && styles.textinput}>{item.text}</Text>
           </Pressable> 
         </Fragment>
       ))}
@@ -59,4 +60,5 @@ const defaultProps: Required<IListItemProps> = {
   onEdit: () => {},
   onPress: () => {},
   onChangeText: () => {},
+  onQuickPress: () => {},
 }

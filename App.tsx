@@ -57,6 +57,7 @@ export default function App() {
   }, [todo])
 
   const editTodo = useCallback((item) => {
+    setEditable(!editable);
     const newItem = {
       text: newInput_text,
       id: item.id,
@@ -67,13 +68,13 @@ export default function App() {
     const after = todo.slice(index + 1);
     const newTodo = [...before, newItem, ...after];
     setTodo(newTodo);
-    // console.log(todo);
-  }, [newInput_text])
+    console.log(todo);
+  }, [newInput_text, editable])
 
   return (
     <View style={styles.container}>
       <Header
-        onPress={onPressed}
+        // onPress={onPressed}
         onClick={onClick}
       />
       <Input
@@ -88,6 +89,7 @@ export default function App() {
         onPress={deleteTodo}
         items={todo}
         onChangeText={(text) => newInput(text)}
+        onQuickPress={onPressed}
       />
     </View>
   );
