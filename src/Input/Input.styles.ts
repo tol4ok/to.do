@@ -8,7 +8,7 @@ export const styles = StyleSheet.create ({
     width: "70%",
   },
 
-  box: {
-    alignItems: "center",
-  }
+  // box: {
+  //   alignItems: "center",
+  // }
 });

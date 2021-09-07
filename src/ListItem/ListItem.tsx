@@ -1,6 +1,6 @@
 
-import React, { FC, Fragment } from 'react';
-import { Text, TouchableHighlight, TextInput, Button, Pressable, Image } from 'react-native';
+import React, { FC, Fragment, useCallback, useRef } from 'react';
+import { Text, TouchableHighlight, TextInput, Button, Pressable, Image, View } from 'react-native';
 
 
 import { styles } from "./ListItem.styles";
@@ -32,23 +32,20 @@ export const ListItem:FC<IListItemProps> = (props) => {
   return(
     <>
       {items.map((item) => (
-        <Fragment key={item.id}>
-
-            {/* <Image 
-              style = {styles.image}
-              source = { require('../../assets/check-square-regular.png') }
-            /> */}
-          <Pressable onPress = {() => onQuickPress("")} onLongPress={() => onPress(item.id)}>
+        <View style={styles.component} key={item.id}>
+          <Pressable style={styles.pressable} onPress = {() => onQuickPress("")} onLongPress={() => {
+            onPress(item.id);
+            }}>
             <TextInput
             onChangeText={(text) => onChangeText(text)}
             onEndEditing={() => onEdit(item)}
             // editable={editable}
-            style={!editable && styles.textinput}
+            style={!editable ? styles.textinput : styles.input}
             defaultValue={item.text}>
             </TextInput>
-            <Text style={editable && styles.textinput}>{item.text}</Text>
-          </Pressable> 
-        </Fragment>
+            <Text style={editable ? styles.textinput : styles.input}>{item.text}</Text>
+          </Pressable>
+        </View>
       ))}
     </>
   )

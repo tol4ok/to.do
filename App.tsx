@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import 'react-native-get-random-values'
+import "react-native-get-random-values";
 import { nanoid } from 'nanoid'
 
-import { tColor } from './src/Template'
+import { tColor } from './src/Template';
 import { Header } from './src/Header';
 import { IList } from './types';
 import { Input } from './src/Input';

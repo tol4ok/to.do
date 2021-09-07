@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { TextInput, View } from 'react-native';
+import React, { FC, useState, useEffect, useRef } from 'react';
+import { TextInput, View, Animated } from 'react-native';
 
 import { styles } from "./Input.styles";
 
@@ -11,6 +11,7 @@ interface InputProps {
 }
 
 export const Input: FC<InputProps> = (props) => {
+  const transition = useRef(new Animated.Value(-350)).current;
 
   const {
     isClicked,
@@ -22,9 +23,35 @@ export const Input: FC<InputProps> = (props) => {
     ...props,
   };
 
+  useEffect(() => {
+    if (isClicked) {
+      Animated.timing(transition, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start();
+    }
+
+    if (!isClicked) {
+      Animated.timing(transition, {
+        toValue: -350,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isClicked])
+
+  // const transit = transition.interpolate({
+  //   inputRange: [0, 1],
+  //   outputRange: ["0px", "45px"],
+  // })
+
   return (
     <>
-      {isClicked && <View style={styles.box}><TextInput placeholder={"Сходить в магазин"} clearTextOnFocus={edited} onChangeText={(text) => onChange(text)} onEndEditing={() => onEditing("")} style={styles.input}/></View>}
+      <Animated.View style={{
+        alignItems: "center",
+        transform: [{translateX: transition}]
+      }}><TextInput placeholder={"Сходить в магазин"} clearTextOnFocus={edited} onChangeText={(text) => onChange(text)} onEndEditing={() => onEditing("")} style={styles.input}/></Animated.View>
     </>
   )
 
