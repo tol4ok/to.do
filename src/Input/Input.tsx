@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 import { styles } from "./Input.styles";
 
@@ -24,7 +24,7 @@ export const Input: FC<InputProps> = (props) => {
 
   return (
     <>
-      {isClicked && <TextInput clearTextOnFocus={edited} onChangeText={(text) => onChange(text)} onEndEditing={() => onEditing("")} style={styles.input}/>}
+      {isClicked && <View style={styles.box}><TextInput placeholder={"Сходить в магазин"} clearTextOnFocus={edited} onChangeText={(text) => onChange(text)} onEndEditing={() => onEditing("")} style={styles.input}/></View>}
     </>
   )
 

@@ -76,6 +76,7 @@ export default function App() {
       <Header
         // onPress={onPressed}
         onClick={onClick}
+        clicked={clicked}
       />
       <Input
         edited={edited}
