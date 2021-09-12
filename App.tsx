@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import "react-native-get-random-values";
 import { nanoid } from 'nanoid'
@@ -8,6 +8,7 @@ import { Header } from './src/Header';
 import { IList } from './types';
 import { Input } from './src/Input';
 import { ListItem } from './src/ListItem';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function App() {
@@ -18,6 +19,36 @@ export default function App() {
   const [todo, setTodo] = useState<IList[]>([]);
   const [clicked, setClicked] = useState(false)
   const [edited, setEdited] = useState(false);
+
+  const saveData = async(data: IList[]) => {
+    try {
+      await AsyncStorage.setItem("todo", JSON.stringify(data));
+      console.log("ew")
+    } catch(err) {
+      console.log("err");
+    }
+  }
+
+  const getData = async() => {
+    try {
+      const data = AsyncStorage.getItem("todo");
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchTodo();
+  }, [])
+
+  const fetchTodo = async() => {
+    const dataZ = await getData();
+    if(dataZ) {
+      console.log(dataZ);
+      setTodo(JSON.parse(dataZ) || "[]");
+    };
+  }
   
   const onClick = useCallback(() => {
     setClicked(!clicked);
@@ -54,6 +85,7 @@ export default function App() {
   const deleteTodo = useCallback((id) => {
     const newTodos = todo.filter((todos) => todos.id !== id);
     setTodo(newTodos);
+    saveData(todo);
   }, [todo])
 
   const editTodo = useCallback((item) => {
@@ -68,8 +100,8 @@ export default function App() {
     const after = todo.slice(index + 1);
     const newTodo = [...before, newItem, ...after];
     setTodo(newTodo);
-    console.log(todo);
-  }, [newInput_text, editable])
+    console.log(todo[0]);
+  }, [newInput_text, editable, todo])
 
   return (
     <View style={styles.container}>
@@ -81,7 +113,10 @@ export default function App() {
       <Input
         edited={edited}
         onChange={(text) => input(text)}
-        onEditing={saveInput}
+        onEditing={() => {
+          saveInput();
+          saveData(todo);
+        }}
         isClicked={clicked}
       />
       <ListItem

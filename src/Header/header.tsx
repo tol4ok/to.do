@@ -49,10 +49,6 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
 
     return (
       <View style={styles.header}>
-        {/* <Button
-          onPress={() => onPress("")}
-          title="Править"
-        /> */}
         <Pressable
           onPress={() => {
           onClick("");
