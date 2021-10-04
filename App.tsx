@@ -77,15 +77,18 @@ export default function App() {
     ];
 
   setTodo(newTodo);
+  console.log("saveInput", newTodo);
 
   setEdited(true);
+
+  saveData(newTodo);
 
   }, [input_Text, todo])
 
   const deleteTodo = useCallback((id) => {
     const newTodos = todo.filter((todos) => todos.id !== id);
     setTodo(newTodos);
-    saveData(todo);
+    saveData(newTodos);
   }, [todo])
 
   const editTodo = useCallback((item) => {
@@ -100,6 +103,7 @@ export default function App() {
     const after = todo.slice(index + 1);
     const newTodo = [...before, newItem, ...after];
     setTodo(newTodo);
+    saveData(newTodo);
     console.log(todo[0]);
   }, [newInput_text, editable, todo])
 
@@ -115,7 +119,6 @@ export default function App() {
         onChange={(text) => input(text)}
         onEditing={() => {
           saveInput();
-          saveData(todo);
         }}
         isClicked={clicked}
       />
