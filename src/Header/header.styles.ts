@@ -7,4 +7,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingTop: Platform.OS === 'ios' ? 50 : 0,
   },
+  textHover: {
+    opacity: 0.7,
+  }
 });
